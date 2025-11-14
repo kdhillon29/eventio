@@ -10,8 +10,8 @@ import { Suspense } from "react";
 import EventCardLoader from "@/components/EventCardLoader";
 
 export default async function Home() {
-  // const eventsData = await db.select().from(events);
-  const eventsData = seedData as SelectEvent[];
+  const eventsData = await db.select().from(events);
+  //  / const eventsData = seedData as SelectEvent[];
   // console.log(eventsData);
   return (
     <section>
