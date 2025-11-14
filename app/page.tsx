@@ -9,6 +9,7 @@ import { events as seedData } from "@/lib/constants";
 import EventCardLoader from "@/components/EventCardLoader";
 
 export default async function Home() {
+  "use cache";
   const eventsData = await db.select().from(events);
   //  / const eventsData = seedData as SelectEvent[];
   // console.log(eventsData);
