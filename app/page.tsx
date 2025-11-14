@@ -5,11 +5,13 @@ import EventCard from "@/components/EventCard";
 import { db } from "@/utils/drizzle";
 import { events } from "@/utils/db/schema";
 import { SelectEvent } from "@/utils/db/schema";
+import { events as seedData } from "@/lib/constants";
 import { Suspense } from "react";
 import EventCardLoader from "@/components/EventCardLoader";
 
 export default async function Home() {
-  const eventsData = await db.select().from(events);
+  // const eventsData = await db.select().from(events);
+  const eventsData = seedData as SelectEvent[];
   // console.log(eventsData);
   return (
     <section>
@@ -35,7 +37,7 @@ export default async function Home() {
           }
         >
           <ul className="events">
-            {eventsData?.map((event: SelectEvent) => (
+            {eventsData?.map((event) => (
               <li key={event.title}>
                 <EventCard {...event} />
               </li>
