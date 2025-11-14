@@ -6,7 +6,6 @@ import { db } from "@/utils/drizzle";
 import { events } from "@/utils/db/schema";
 import { SelectEvent } from "@/utils/db/schema";
 import { events as seedData } from "@/lib/constants";
-import { Suspense } from "react";
 import EventCardLoader from "@/components/EventCardLoader";
 
 export default async function Home() {
@@ -25,8 +24,9 @@ export default async function Home() {
       <ExploreBtn />
       <div className="mt-3 space-y-7 md:mt-6">
         <h3>Featured Events</h3>
-        <Suspense
-          fallback={
+
+        <>
+          {eventsData?.length === 0 && (
             <ul className="events">
               {[1, 2, 3, 4].map((_, index) => (
                 <li key={index}>
@@ -34,16 +34,18 @@ export default async function Home() {
                 </li>
               ))}
             </ul>
-          }
-        >
-          <ul className="events">
-            {eventsData?.map((event) => (
-              <li key={event.title}>
-                <EventCard {...event} />
-              </li>
-            ))}
-          </ul>
-        </Suspense>
+          )}
+
+          {eventsData?.length > 0 && (
+            <ul className="events">
+              {eventsData?.map((event) => (
+                <li key={event.title}>
+                  <EventCard {...event} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       </div>
     </section>
   );
