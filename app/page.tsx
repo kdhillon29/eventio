@@ -9,7 +9,6 @@ import { Suspense } from "react";
 import EventCardLoader from "@/components/EventCardLoader";
 
 export default async function Home() {
-  "use cache";
   const eventsData = await db.select().from(events);
   // console.log(eventsData);
   return (
