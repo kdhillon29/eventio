@@ -11,7 +11,7 @@ import EventCardLoader from "@/components/EventCardLoader";
 export default async function Home() {
   "use cache";
   const eventsData = await db.select().from(events);
-  console.log(eventsData);
+  // console.log(eventsData);
   return (
     <section>
       <h1 className="text-center max-sm:text-3xl">
