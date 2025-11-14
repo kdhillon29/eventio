@@ -1,16 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SelectEvent } from "@/utils/db/schema";
 
-interface Props {
-  title: string;
-  image: string;
-  slug: string;
-  location: string;
-  date: string;
-  time: string;
-}
+// interface Props extends SelectEvent {
+// }
 
-const EventCard = ({ title, image, slug, location, date, time }: Props) => {
+const EventCard = ({
+  title,
+  image,
+  slug,
+  location,
+  date,
+  time,
+}: SelectEvent) => {
   return (
     <Link href={`/events/${slug}`} id="event-card">
       <Image
