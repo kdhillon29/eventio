@@ -1,0 +1,1 @@
+ALTER TABLE "events_table" ADD COLUMN "slug" text NOT NULL;
