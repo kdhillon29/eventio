@@ -15,10 +15,10 @@ export default async function Home() {
   // console.log(eventsData);
   return (
     <section>
-      <h1 className="text-center max-sm:text-3xl">
+      <h1 className="text-center max-sm:text-4xl leading-8 tracking-wider">
         The Hub for Every Dev <br /> Event You Can&apos;t Miss
       </h1>
-      <p className="text-center mt-2 max-sm:text-sm">
+      <p className="text-center mt-2 max-sm:text-sm max-sm:leading-6">
         Hackathons, Meetups, and Conferences, All in One Place
       </p>
 
