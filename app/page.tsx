@@ -4,8 +4,7 @@ import EventCard from "@/components/EventCard";
 
 import { db } from "@/utils/drizzle";
 import { events } from "@/utils/db/schema";
-import { SelectEvent } from "@/utils/db/schema";
-import { events as seedData } from "@/lib/constants";
+
 import EventCardLoader from "@/components/EventCardLoader";
 
 export default async function Home() {
@@ -15,10 +14,10 @@ export default async function Home() {
   // console.log(eventsData);
   return (
     <section>
-      <h1 className="text-center max-sm:text-4xl leading-8 tracking-wider">
+      <h1 className="text-center max-sm:text-3xl text-6xl leading-14 tracking-wide">
         The Hub for Every Dev <br /> Event You Can&apos;t Miss
       </h1>
-      <p className="text-center mt-2 max-sm:text-sm max-sm:leading-6">
+      <p className="text-center mt-2 space-y-6 max-sm:text-sm max-sm:leading-8">
         Hackathons, Meetups, and Conferences, All in One Place
       </p>
 

@@ -3,6 +3,7 @@ import { Pool } from "pg";
 import { events } from "./schema";
 import { events as seedData } from "../../lib/constants";
 import * as dotenv from "dotenv";
+import slugify from "react-slugify";
 
 dotenv.config({ path: "./.env" });
 
@@ -30,11 +31,17 @@ const main = async () => {
       data.push({
         title: event.title,
         description: event.description,
-        slug: event.slug,
+        slug: slugify(event.title),
         image: event.image,
         location: event.location,
         date: event.date,
         time: event.time,
+        venue: event.venue,
+        mode: event.mode,
+        audience: event.audience,
+        agenda: event.agenda,
+        organizer: event.organizer,
+        tags: event.tags,
       });
     });
     await db.insert(events).values(data);

@@ -6,9 +6,11 @@ const Navbar = () => {
     <header>
       <nav>
         <Link href="/" className="logo">
-          <Image src="/icons/logo.png" alt="logo" width={24} height={24} />
+          <Image src="/icons/logo.png" alt="logo" width={28} height={28} />
 
-          <p>DevEvent</p>
+          <p>
+            <span className="text-purple-600">Dev</span>Event
+          </p>
         </Link>
 
         <ul>
