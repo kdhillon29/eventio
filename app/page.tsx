@@ -38,11 +38,16 @@ export default async function Home() {
 
           {eventsData?.length > 0 && (
             <ul className="events">
-              {eventsData?.map((event) => (
-                <li key={event.title}>
-                  <EventCard {...event} />
-                </li>
-              ))}
+              {eventsData?.map((event) => {
+                console.log("event ", event);
+                event.image = event.image.trim();
+
+                return (
+                  <li key={event.title}>
+                    <EventCard {...event} />
+                  </li>
+                );
+              })}
             </ul>
           )}
         </>
