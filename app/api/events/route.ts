@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     const agenda = (formData.get("agenda") as string)?.split(",");
 
     // event.image = (uploadResult as { secure_url: string }).secure_url;
-    event.image = "/images/event1.png";
+    if (!event.image) event.image = "/images/event1.png";
     const slug = slugify(event.title as string);
     const eventData: InsertEvent = {
       ...event,

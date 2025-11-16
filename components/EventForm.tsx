@@ -22,7 +22,10 @@ import { events } from "@/utils/db/schema";
 import slugify from "react-slugify";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
-import { Loader } from "lucide-react";
+import { Loader, TrashIcon } from "lucide-react";
+import ImageUploader from "./ImageUploader";
+import Image from "next/image";
+import { supabase } from "./ImageUploader";
 // --------------------
 // ZOD SCHEMA
 // --------------------
@@ -78,9 +81,9 @@ export default function EventForm() {
     },
   });
   // const { setValue } = useFormContext();
-  const { title } = form.getValues();
-  form.setValue("slug", slugify(title));
-  console.log(title);
+  // const { title } = form.getValues();
+  // form.setValue("slug", slugify(title));
+  // console.log(title);
   const {
     fields: agendaFields,
     append: appendAgenda,
@@ -194,11 +197,47 @@ export default function EventForm() {
               <FormItem>
                 <FormLabel>Image URL</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="https://example.com/event.jpg"
+                  <ImageUploader
+                    bucket="eventio"
+                    folder="uploads"
+                    onUpload={(url: string) => form.setValue("image", url)}
                     {...field}
                   />
+                  {/* <Input
+                    placeholder="https://example.com/event.jpg"
+                    {...field}
+                  /> */}
                 </FormControl>
+                {field.value && (
+                  <div className="w-48 h-48 relative mt-4">
+                    <Image
+                      src={field.value}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      alt="Uploaded"
+                      className="w-full h-full object-cover aspect-square rounded shadow"
+                    />
+                    {field.value && (
+                      <TrashIcon
+                        size={28}
+                        className="absolute top-0 right-0 h-6 w-6 text-2xl p-1 bg-green-600 rounded-full cursor-pointer"
+                        onClick={async () => {
+                          try {
+                            const img = field.value.split("/").pop();
+                            console.log("Removing file:", img);
+                            await supabase.storage
+                              .from("eventio")
+                              .remove(["uploads/" + img]);
+
+                            form.setValue("image", "");
+                          } catch (error) {
+                            console.error("Error removing file:", error);
+                          }
+                        }}
+                      />
+                    )}
+                  </div>
+                )}
                 <FormMessage />
               </FormItem>
             )}
