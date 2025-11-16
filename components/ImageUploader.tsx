@@ -34,9 +34,9 @@ export default function ImageUploader({
       const { data, error } = await supabase.storage
         .from(bucket)
         .upload(filePath, file, {
-          onUploadProgress: (p) => {
-            setProgress(Math.round((p.loaded / p.total) * 100));
-          },
+          //   onProgress: (p: ProgressEvent) => {
+          //     setProgress(Math.round((p.loaded / p.total) * 100));
+          //   },
           upsert: false,
         });
 
