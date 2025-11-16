@@ -29,11 +29,11 @@ export async function POST(req: NextRequest) {
     //     { status: 400 }
     //   );
 
-    const tags = JSON.parse(formData.get("tags") as string);
-    const agenda = JSON.parse(formData.get("agenda") as string);
+    const tags = (formData.get("tags") as string)?.split(",");
+    const agenda = (formData.get("agenda") as string)?.split(",");
 
     // event.image = (uploadResult as { secure_url: string }).secure_url;
-    // event.image = "/images/event1.png";
+    event.image = "/images/event1.png";
     const slug = slugify(event.title as string);
     const eventData: InsertEvent = {
       ...event,
