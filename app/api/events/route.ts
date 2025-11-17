@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { db } from "@/utils/drizzle";
+import { desc } from "drizzle-orm";
 import { events, InsertEvent } from "@/utils/db/schema";
 import slugify from "react-slugify";
 
@@ -67,8 +68,12 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const eventsData = await db.select().from(events);
+    const eventsData = await db
+      .select()
+      .from(events)
+      .orderBy(desc(events.createdAt));
 
+    // new Promise((resolve) => setTimeout(resolve, 2000));
     return NextResponse.json(
       { message: "Events fetched successfully", eventsData },
       { status: 200 }

@@ -2,19 +2,35 @@ import ExploreBtn from "@/components/ExploreBtn";
 
 import EventCard from "@/components/EventCard";
 
-import { db } from "@/utils/drizzle";
-import { events } from "@/utils/db/schema";
-
 import EventCardLoader from "@/components/EventCardLoader";
+import { SelectEvent } from "@/utils/db/schema";
+import { Suspense } from "react";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+async function EventsList() {
+  const response = await fetch(`${BASE_URL}/api/events`);
+  const { eventsData } = await response.json();
+
+  return (
+    <ul className="events">
+      {eventsData?.map((event: SelectEvent) => (
+        <li key={event.title}>
+          <EventCard {...event} />
+        </li>
+      ))}
+    </ul>
+  );
+}
 export default async function Home() {
-  "use cache";
-  const eventsData = await db.select().from(events);
-  //  / const eventsData = seedData as SelectEvent[];
+  // "use cache";
+  // const response = await fetch(`${BASE_URL}/api/events`);
+  // const { eventsData } = await response.json();
+
   // console.log(eventsData);
   return (
     <section>
-      <h1 className="text-center max-sm:text-3xl text-6xl leading-14 tracking-wide">
+      <h1 className="text-center max-sm:text-4xl text-6xl leading-10 tracking-wide">
         The Hub for Every Dev <br /> Event You Can&apos;t Miss
       </h1>
       <p className="text-center mt-2 space-y-6 max-sm:text-sm max-sm:leading-8">
@@ -25,32 +41,19 @@ export default async function Home() {
       <div className="mt-3 space-y-7 md:mt-6">
         <h3>Featured Events</h3>
 
-        <>
-          {eventsData?.length === 0 && (
+        <Suspense
+          fallback={
             <ul className="events">
-              {[1, 2, 3, 4].map((_, index) => (
+              {Array.from({ length: 6 }).map((_, index) => (
                 <li key={index}>
                   <EventCardLoader />
                 </li>
               ))}
             </ul>
-          )}
-
-          {eventsData?.length > 0 && (
-            <ul className="events">
-              {eventsData?.map((event) => {
-                console.log("event ", event);
-                event.image = event.image.trim();
-
-                return (
-                  <li key={event.title}>
-                    <EventCard {...event} />
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </>
+          }
+        >
+          <EventsList />
+        </Suspense>
       </div>
     </section>
   );

@@ -195,7 +195,7 @@ export default function EventForm() {
             name="image"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Image URL</FormLabel>
+                <FormLabel>Upload Image </FormLabel>
                 <FormControl>
                   <ImageUploader
                     bucket="eventio"
