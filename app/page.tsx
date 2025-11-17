@@ -9,6 +9,7 @@ import { Suspense } from "react";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 async function EventsList() {
+  //blocking code
   const response = await fetch(`${BASE_URL}/api/events`);
   const { eventsData } = await response.json();
 
@@ -30,10 +31,10 @@ export default async function Home() {
   // console.log(eventsData);
   return (
     <section>
-      <h1 className="text-center max-sm:text-4xl text-6xl leading-10 tracking-wide">
+      <h1 className="text-center max-sm:text-4xl text-6xl  tracking-wide">
         The Hub for Every Dev <br /> Event You Can&apos;t Miss
       </h1>
-      <p className="text-center mt-2 space-y-6 max-sm:text-sm max-sm:leading-8">
+      <p className="text-center mt-3 space-y-6 max-sm:text-sm ">
         Hackathons, Meetups, and Conferences, All in One Place
       </p>
 
