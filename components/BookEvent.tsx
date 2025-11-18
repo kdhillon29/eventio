@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useEffect } from "react";
 import { EventBooking } from "@/actions/booking.actions";
 import { InsertBooking } from "@/utils/db/schema";
 import { useForm } from "react-hook-form";
@@ -40,6 +40,12 @@ export default function BookingForm({ eventId }: { eventId: number }) {
     },
   });
 
+  useEffect(() => {
+    if (state.success && !isPending) {
+      form.reset();
+    }
+  }, [state, isPending]);
+
   const onSubmit = (values: z.infer<typeof BookingSchema>) => {
     const formData = new FormData();
     formData.append("name", values.name);
@@ -61,7 +67,6 @@ export default function BookingForm({ eventId }: { eventId: number }) {
         form.setError(key as keyof typeof state.errors, { message: val[0] });
       }
     });
-    form.reset();
   };
   return (
     <div className="max-w-md space-y-4">
@@ -124,8 +129,9 @@ export default function BookingForm({ eventId }: { eventId: number }) {
           Booking submitted successfully!
         </p>
       )}
-      {state.errors && (
+      {state.errors && Object.values(state.errors).length > 0 && (
         <p className="text-red-600 text-sm">
+          <strong>server Error:</strong>
           {Object.values(state.errors).join(", ")}
         </p>
       )}

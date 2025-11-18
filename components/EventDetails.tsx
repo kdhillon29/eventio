@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { SelectEvent } from "@/utils/db/schema";
-// import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
+import { getSimilarEventsBySlug } from "@/actions/events.actions";
 import Image from "next/image";
 import BookEvent from "@/components/BookEvent";
 import EventCard from "@/components/EventCard";
@@ -97,7 +97,8 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
 
   const bookings = 10;
 
-  //   const similarEvents: SelectEvent[] = await getSimilarEventsBySlug(slug);
+  const similarEvents: SelectEvent[] =
+    (await getSimilarEventsBySlug(slug)) || [];
 
   return (
     <section id="event">
@@ -188,12 +189,13 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
 
       <div className="flex w-full flex-col gap-4 pt-20">
         <h2>Similar Events</h2>
-        {/* <div className="events">
+        <div className="events">
           {similarEvents.length > 0 &&
-            similarEvents.map((similarEvent: IEvent) => (
+            similarEvents.map((similarEvent) => (
               <EventCard key={similarEvent.title} {...similarEvent} />
             ))}
-        </div> */}
+        </div>
+        {similarEvents.length === 0 && <p>No similar events found</p>}
       </div>
     </section>
   );
