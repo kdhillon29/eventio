@@ -111,7 +111,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
       </Link>
       <h1 className="text-3xl md:text-6xl space-y-6">{title}</h1>
       <p className=" mt-3 text-sm md:text-base text-pretty ">
-        {description.split(".")[0]}
+        {description.split(". ")[0]}
       </p>
       <div className="details">
         {/*    Left Side - Event Content */}
