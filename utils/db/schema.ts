@@ -64,7 +64,14 @@ export const bookings = pgTable(
       .notNull()
       .$onUpdate(() => new Date()),
   },
-  (table) => [index("email_idx").on(table.email)]
+  // (table) => [index("email_idx").on(table.email)],
+  (table) => ({
+    // Composite unique constraint
+    bookingUnique: uniqueIndex("event_email_idx").on(
+      table.event_id,
+      table.email
+    ),
+  })
 );
 
 export const bookingsRelations = relations(bookings, ({ one }) => ({

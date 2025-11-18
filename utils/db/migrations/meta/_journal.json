@@ -15,6 +15,13 @@
       "when": 1763198337522,
       "tag": "0001_zippy_lake",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1763457153999,
+      "tag": "0002_previous_red_wolf",
+      "breakpoints": true
     }
   ]
 }
