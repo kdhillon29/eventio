@@ -197,17 +197,17 @@
 
   #event {
     .header {
-      @apply flex w-2/3 flex-col items-start gap-4 max-lg:w-full mb-10;
+      @apply flex w-2/3 flex-col items-start gap-6 md:w-full mb-10;
     }
 
     .details {
-      @apply flex w-full flex-col lg:flex-row gap-12 items-start mt-12 max-lg:items-center;
+      @apply flex w-full flex-col md:flex-row gap-12 items-start  mt-6;
 
       .content {
-        @apply flex flex-[2] flex-col gap-8 max-lg:w-full;
+        @apply flex flex-2 flex-col gap-8 w-full;
 
         .banner {
-          @apply max-h-[457px] w-full rounded-lg object-cover;
+          @apply aspect-5/3 w-full rounded-lg object-cover;
         }
 
         .agenda {
@@ -215,14 +215,14 @@
 
           ul {
             li {
-              @apply text-light-100 text-lg max-sm:text-sm;
+              @apply text-light-100 list-inside list-disc  text-lg space-y-2 max-sm:text-sm;
             }
           }
         }
       }
 
       .booking {
-        @apply flex-1 w-full p-4 border-l border-gray-700;
+        @apply flex-1 w-full md:w-1/4 p-4 border-l border-gray-700;
 
         .signup-card {
           @apply bg-dark-100 border-dark-200 card-shadow flex w-full flex-col gap-6 rounded-[10px] border px-5 py-6;

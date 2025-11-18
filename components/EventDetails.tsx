@@ -38,13 +38,16 @@ const EventAgenda = ({ agendaItems }: { agendaItems: string[] }) => (
 );
 
 const EventTags = ({ tags }: { tags: string[] }) => (
-  <div className="flex flex-row gap-1.5 flex-wrap">
-    {tags.map((tag) => (
-      <div className="pill" key={tag}>
-        {tag}
-      </div>
-    ))}
-  </div>
+  <>
+    <h2>Tags</h2>
+    <div className="flex flex-row gap-1 flex-wrap">
+      {tags.map((tag) => (
+        <div className="pill" key={tag}>
+          {tag}
+        </div>
+      ))}
+    </div>
+  </>
 );
 
 const EventDetails = async ({ params }: { params: Promise<string> }) => {
@@ -79,7 +82,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
   const {
     description,
     image,
-    overview,
+    title,
     date,
     time,
     location,
@@ -100,16 +103,15 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
     <section id="event">
       <Link
         href="/"
-        className="text-xs mb-6 text-purple-400  flex gap-1  justify-start items-center "
+        className="text-xs mb-6 text-purple-600  flex gap-1  justify-start items-center "
       >
         <ArrowBigLeft size={12} />
         <strong> Back to Events</strong>
       </Link>
-      <div className="header">
-        <h1>Event Description</h1>
-        <p className="text-xs md:text-sm tracking-widest">{description}</p>
-      </div>
-
+      <h1 className="text-3xl md:text-6xl space-y-6">{title}</h1>
+      <p className=" mt-3 text-sm md:text-base text-pretty ">
+        {description.split(".")[0]}
+      </p>
       <div className="details">
         {/*    Left Side - Event Content */}
         <div className="content">
@@ -121,27 +123,40 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
             className="banner"
           />
 
-          <section className="flex-col-gap-2">
-            <h2>Overview</h2>
-            <p>{overview}</p>
+          <section className="w-full mt-3 md:mt-6 flex flex-col gap-2">
+            <div className="">
+              <h2 className="my-3">Overview</h2>
+              <p className=" w-full text-xs md:text-base text-justify tracking-wide leading-8 ">
+                {description}
+              </p>
+            </div>
           </section>
 
           <section className="flex-col-gap-2">
             <h2>Event Details</h2>
-
-            <EventDetailItem
-              icon="/icons/calendar.svg"
-              alt="calendar"
-              label={date}
-            />
-            <EventDetailItem icon="/icons/clock.svg" alt="clock" label={time} />
-            <EventDetailItem icon="/icons/pin.svg" alt="pin" label={location} />
-            <EventDetailItem icon="/icons/mode.svg" alt="mode" label={mode} />
-            <EventDetailItem
-              icon="/icons/audience.svg"
-              alt="audience"
-              label={audience}
-            />
+            <div className=" mt-3 grid grid-cols-2 gap-3">
+              <EventDetailItem
+                icon="/icons/calendar.svg"
+                alt="calendar"
+                label={date}
+              />
+              <EventDetailItem
+                icon="/icons/clock.svg"
+                alt="clock"
+                label={time}
+              />
+              <EventDetailItem
+                icon="/icons/pin.svg"
+                alt="pin"
+                label={location}
+              />
+              <EventDetailItem icon="/icons/mode.svg" alt="mode" label={mode} />
+              <EventDetailItem
+                icon="/icons/audience.svg"
+                alt="audience"
+                label={audience}
+              />
+            </div>
           </section>
 
           <EventAgenda agendaItems={agenda} />
