@@ -14,7 +14,7 @@ async function EventsList() {
   const { eventsData } = await response.json();
 
   return (
-    <ul className="events">
+    <ul className="events list-none">
       {eventsData?.map((event: SelectEvent) => (
         <li key={event.title}>
           <EventCard {...event} />
@@ -44,7 +44,7 @@ export default async function Home() {
 
         <Suspense
           fallback={
-            <ul className="events">
+            <ul className="events list-none">
               {Array.from({ length: 6 }).map((_, index) => (
                 <li key={index}>
                   <EventCardLoader />
