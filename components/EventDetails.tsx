@@ -127,7 +127,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
           <section className="w-full mt-3 md:mt-6 flex flex-col gap-2">
             <div className="">
               <h2 className="my-3">Overview</h2>
-              <p className=" w-full text-xs md:text-base text-justify tracking-wide leading-8 ">
+              <p className=" w-full text-sm md:text-base leading-8 ">
                 {description}
               </p>
             </div>
